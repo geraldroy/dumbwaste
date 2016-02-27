@@ -23,6 +23,8 @@ clock = pygame.time.Clock()
 batImg = pygame.image.load('sprites/battery.png')
 plugImg = pygame.image.load('sprites/plug.png')
 berdeImg = pygame.image.load('sprites/berde.png').convert_alpha()
+berdeImg2 = pygame.image.load('sprites/berdekuryente.png').convert_alpha()
+
 
 def things(thingx, thingy, thingw, thingh, color):
     pygame.draw.rect(gameDisplay, color, [thingx, thingy, thingw, thingh])
@@ -30,10 +32,10 @@ def things(thingx, thingy, thingw, thingh, color):
 def bat(x,y):
     gameDisplay.blit(batImg,(x,y))
 
-def berde():
-    berdeImg_rect = berdeImg.get_rect()
+def berde(image):
+    berdeImg_rect = image.get_rect()
     berdeImg_rect.center = ((display_width/2),(display_height/2))
-    gameDisplay.blit(berdeImg,berdeImg_rect)
+    gameDisplay.blit(image,berdeImg_rect)
     pygame.display.update()
 
 def plug(x,y):
@@ -41,9 +43,14 @@ def plug(x,y):
 
 def display_start():
     gameDisplay.fill(white)
-    berde()
+    berde(berdeImg)
     message_display("do not overcharge")
     time.sleep(0.25)
+
+def display_fail():
+    gameDisplay.fill(white)
+    time.sleep(0.25)
+
 
 def text_objects(text, font):
     textSurface = font.render(text, True, black)
@@ -65,6 +72,7 @@ def message_display(text):
 
 def crash():
     gameDisplay.fill(white)
+    berde(berdeImg2)
     pygame.display.update()
     message_display('Overcharged!!!')
 
@@ -104,7 +112,7 @@ def game_loop():
                     if (250-63) <= thing_height <= 250:
                     	print('you won')
                         #gameDisplay.fill(white)
-                        berde()
+                        berde(berdeImg)
                         message_display("yehey")
                         pygame.display.update()
                         sleep(1)
@@ -124,7 +132,8 @@ def game_loop():
         thing_starty -= 5
         
         if thing_height > 250:
-        	crash()
+            crash()
+            gameExit = True
         elif (250-63) <= thing_height <= 250:
         	color = green
         elif 62 < thing_height < (250 - 62):
