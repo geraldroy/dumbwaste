@@ -22,17 +22,12 @@ clock = pygame.time.Clock()
 
 batImg = pygame.image.load('sprites/battery.png')
 plugImg = pygame.image.load('sprites/plug.png')
-berdeImg = pygame.image.load('sprites/berde.png')
 
 def things(thingx, thingy, thingw, thingh, color):
     pygame.draw.rect(gameDisplay, color, [thingx, thingy, thingw, thingh])
 
 def bat(x,y):
     gameDisplay.blit(batImg,(x,y))
-
-def berde(x,y):
-    berdeImg = berdeImg.convert_alpha().get_rect()
-    gameDisplay.blit(berdeImg,(x,y))
 
 def plug(x,y):
     gameDisplay.blit(plugImg,(x,y))
@@ -55,9 +50,9 @@ def message_display(text):
     pygame.quit()
     quit()
 
+    
+
 def crash():
-    gameDisplay.fill(white)
-    pygame.display.update()
     message_display('Overcharged!!!')
 
 
@@ -121,6 +116,8 @@ def game_loop():
             
         pygame.display.update()
         clock.tick(30)
+
+
 
 game_loop()
 pygame.quit()
