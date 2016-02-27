@@ -18,5 +18,6 @@ block_color = (53,115,255)
 car_width = 80
  
 gameDisplay = pygame.display.set_mode((display_width,display_height))
-pygame.display.set_caption('A bit Racey')
+pygame.display.set_caption('Dumbwaste')
 clock = pygame.time.Clock()
+gameDisplay.fill(white)
