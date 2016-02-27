@@ -22,7 +22,7 @@ clock = pygame.time.Clock()
 
 batImg = pygame.image.load('sprites/battery.png')
 plugImg = pygame.image.load('sprites/plug.png')
-berdeImg = pygame.image.load('sprites/berde.png')
+berdeImg = pygame.image.load('sprites/berde.png').convert_alpha()
 
 def things(thingx, thingy, thingw, thingh, color):
     pygame.draw.rect(gameDisplay, color, [thingx, thingy, thingw, thingh])
@@ -30,19 +30,27 @@ def things(thingx, thingy, thingw, thingh, color):
 def bat(x,y):
     gameDisplay.blit(batImg,(x,y))
 
-def berde(x,y):
-    berdeImg = berdeImg.convert_alpha().get_rect()
-    gameDisplay.blit(berdeImg,(x,y))
+def berde():
+    berdeImg_rect = berdeImg.get_rect()
+    berdeImg_rect.center = ((display_width/2),(display_height/2))
+    gameDisplay.blit(berdeImg,berdeImg_rect)
+    pygame.display.update()
 
 def plug(x,y):
     gameDisplay.blit(plugImg,(x,y))
+
+def display_start():
+    gameDisplay.fill(white)
+    berde()
+    message_display("do not overcharge")
+    time.sleep(0.25)
 
 def text_objects(text, font):
     textSurface = font.render(text, True, black)
     return textSurface, textSurface.get_rect()
 
 def message_display(text):
-    largeText = pygame.font.Font('freesansbold.ttf',115)
+    largeText = pygame.font.Font('freesansbold.ttf',70)
     TextSurf, TextRect = text_objects(text, largeText)
     TextRect.center = ((display_width/2),(display_height/2))
     gameDisplay.blit(TextSurf, TextRect)
@@ -52,8 +60,8 @@ def message_display(text):
     time.sleep(2)
 
     #game_loop()
-    pygame.quit()
-    quit()
+    #pygame.quit()
+    #quit()
 
 def crash():
     gameDisplay.fill(white)
@@ -95,6 +103,12 @@ def game_loop():
                 if event.key == pygame.K_SPACE:
                     if (250-63) <= thing_height <= 250:
                     	print('you won')
+                        #gameDisplay.fill(white)
+                        berde()
+                        message_display("yehey")
+                        pygame.display.update()
+                        sleep(1)
+
                     	gameExit = True
                
         gameDisplay.fill(white)
@@ -122,6 +136,7 @@ def game_loop():
         pygame.display.update()
         clock.tick(30)
 
+display_start()
 game_loop()
 pygame.quit()
 quit()
