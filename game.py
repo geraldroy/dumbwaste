@@ -20,8 +20,8 @@ gameDisplay = pygame.display.set_mode((display_width,display_height))
 pygame.display.set_caption('No Overcharging')
 clock = pygame.time.Clock()
 
-batImg = pygame.image.load('dumbwaste/sprites/battery.png')
-plugImg = pygame.image.load('dumbwaste/sprites/plug.png')
+batImg = pygame.image.load('sprites/battery.png')
+plugImg = pygame.image.load('sprites/plug.png')
 
 def things(thingx, thingy, thingw, thingh, color):
     pygame.draw.rect(gameDisplay, color, [thingx, thingy, thingw, thingh])
@@ -120,5 +120,3 @@ def game_loop():
 
 
 game_loop()
-pygame.quit()
-quit()

@@ -12,6 +12,7 @@ red = (150,0,0)
 green = (0, 150 ,0)
 bright_red = (255,0,0)
 bright_green = (0,255,0)
+yellow = (255, 255, 0)
  
 block_color = (53,115,255)
  

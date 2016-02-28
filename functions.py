@@ -3,6 +3,8 @@ import time
 import random
 from specs import *
 
+
+
 def game_intro():
     
     intro = True
